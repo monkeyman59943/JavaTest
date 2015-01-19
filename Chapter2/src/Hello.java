@@ -9,6 +9,12 @@ public class Hello {
     	Dogs dolla = new Dogs();
     	dolla.printThis();
 		System.out.println("Hello Worlds");
+
+
+		dolla.printThat();
+
+
+
 		System.out.println("This may not work");
         System.out.println("Let's hope this works");
     }
