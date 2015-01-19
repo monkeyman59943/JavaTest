@@ -11,9 +11,6 @@ public class Hello {
 		System.out.println("Hello Worlds");
 
 
-		dolla.printThat();
-
-
 
 		System.out.println("This may not work");
         System.out.println("Let's hope this works");
