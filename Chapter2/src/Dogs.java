@@ -8,6 +8,10 @@ public class Dogs {
     {
 
     }
+    public void printThis()
+    {
+    	System.out.println("This");
+    }
     public void printThat()
     {
         System.out.println("That");
