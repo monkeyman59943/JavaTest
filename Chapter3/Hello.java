@@ -1,4 +1,4 @@
-package Chapter3;
+//package Chapter3;
 
 /**
  * Created by jacob on 1/24/15.
@@ -8,4 +8,4 @@ public class Hello {
     {
         System.out.printf("This is a test");
     }
-}
+};
