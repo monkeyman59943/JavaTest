@@ -1,25 +1,28 @@
- class HeartRate
+package Chapter3;
+
+import java.time.LocalDateTime;
+
+
+class HeartRates
 {
 
-
-
-	 //this doesn't work in c++ but becasue I am in a java class and not a c++ class I don't reall care so here is how to do it in hava.
-
-
-
-    int day, month, year, maxHR, tHRL,tHRH, age;
+    LocalDateTime currentDateTime = LocalDateTime.now();
+    int day, month, year,age;
+    double maxHR, tHRH, tHRL, tHRA;
     String nameF, nameL;
-    Date date = new Date();
-    public HeartRate(int d, int m, int y, String nF, String nL)
+
+    public HeartRates(int d, int m, int y, String nF, String nL)
     {
         day = d;
         month = m;
         year = y;
         nameF = nF;
         nameL = nL;
+        //runs the required methods to calculate the values for maxHR and target heartrate and the age of the person
+        calcAge();
         calcMaxRate();
         calcTargetRate();
-        calcAge();
+
     }
 
 
@@ -59,7 +62,15 @@
     {
         return age;
     }
-    public int getMonth()
+    public  double getMaxHR()
+    {
+        return maxHR;
+    }
+    public  double getAvgTHR()
+    {
+        return tHRA;
+    }
+    public  int getMonth()
     {
         return month;
     }
@@ -71,7 +82,7 @@
     {
         return day;
     }
-  public  String getFirstName()
+    public  String getFirstName()
     {
         return nameF;
     }
@@ -82,37 +93,39 @@
 
 
 
-    //Ohter Functions
+    //Other Functions
     int calcMaxRate()
     {
         maxHR = 220 - age;
-        return 220 - age;
+        return (220 - age);
     }
     public double calcTargetRate()
     {
         //Low end of the target heart rate is 50% of the max heart rate
-        tHRL = (int)(((double) maxHR) * 0.5);
+        tHRL =  maxHR * 0.5;
         //High end of the target heart rate is 85% of the max heart rate
-        tHRH = (int)(((double)maxHR)*0.85);
-        return (((double)tHRL) + ((double)tHRH)) / 2;
+        tHRH = maxHR*0.85;
+        tHRA = (tHRH + tHRL)/2.0;
+        return (tHRH + tHRL)/2.0;
     }
     public int calcAge()
     {//This only works in java so it's commented out
 
-		age = date.getYear()-year;
-		if(date.getMonth()<month)
+		age = currentDateTime.getYear()-year- 1;
+
+		if(currentDateTime.getMonthValue()>month)
 		{
 		age++;
 		}
-		if(date.getMoth==month)
+		if(currentDateTime.getMonthValue()==month)
 		{
-			if(day >= date.getDate())
+			if(currentDateTime.getDayOfMonth()>=day)
 			{
 			age++;
 			}
 		}
-
+    return age;
 
     }
 
-};
+}
