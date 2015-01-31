@@ -29,10 +29,6 @@ class HeartRates
 
     //Setters
 
-    public void setAge(int a)
-    {
-        age = a;
-    }
     public void setMonth(int m)
     {
         month = m;
@@ -131,3 +127,4 @@ class HeartRates
 
 
 }
+//This is a test

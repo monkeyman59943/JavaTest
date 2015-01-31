@@ -59,14 +59,16 @@ public class HeartRateRunner {
 
 
     	//This is where the person is created
-        HeartRates Person = new HeartRates(day, month, year, first, last);
+        HeartRates person = new HeartRates(day, month, year, first, last);
         //This is for clarity on where the output starts
         for(int i = 0;i<10; i++)
         {
         	System.out.println();
         }
-        System.out.println("You are "+Person.getAge()+ " years old");
-        System.out.println("Your maximum heart rate is " + Person.getMaxHR() + " beats per minute");
-        System.out.println("Your target heart rate is " + Person.getAvgTHR() + " beats per minute");
+        System.out.println("Your name is " + person.getFirstName() + " " + person.getLastName());
+        System.out.println("You are "+person.getAge()+ " years old");
+        System.out.println("Your Date of birth is " + person.getMonth() + "/" + person.getDay() + "/" + person.getYear());
+        System.out.println("Your maximum heart rate is " + person.getMaxHR() + " beats per minute");
+        System.out.println("Your target heart rate is " + person.getAvgTHR() + " beats per minute");
     }
 }
