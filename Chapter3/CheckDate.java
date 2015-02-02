@@ -28,7 +28,7 @@ public class CheckDate
 	}
 	public static boolean checkYear(int y)
     {
-        if(currentDateTime.getYear()-220<0)
+        if((currentDateTime.getYear()-y)>210)
         {
             System.out.println("The year you have entered is too low.");
             return false;
