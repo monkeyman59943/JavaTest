@@ -6,13 +6,19 @@ import java.util.*;
 //An important bug that might exist is if the player puts a space inbetween the integers inputed it might causes issues with the input stream.
 //That might need to be fixed if it is true
 
+
+//Without the condition for if the second and third and so on guesses are equal to the one before it
+//it is counting that guess twice indstead of it being an invalid guess
+
+
+
 //Need to do
 //Make sure the player is guessing valid numbers
 //Make sure the answer is within the correct interval
 //Make a way to get the guesses beyond the first one if it is incorrect.
 
 //Fun things to do later
-//make sure the players are enteting integers.
+//make sure the players are entering integers.
 //clear the console after the initial answer is inputed so that player 2 can't see the answer
 
 public class Game
@@ -34,8 +40,9 @@ public class Game
             if (answer > guess1)
             {
                 System.out.println("your guess was too low.");
-                System.out.println("Please make a guess that is higher than " + guess1 + "and less than or equal to 100");
+                System.out.println("Please make a guess that is higher than " + guess1 + " and less than or equal to 100");
                 guess2 = scan.nextInt();
+                //Make a condition for if it is equal to the previous guess
                 while(guess2<guess1)
                 {
                    System.out.println("You're guess is not larger than the one before this.  Please enter a larger integer larger than " + guess1);
@@ -48,6 +55,7 @@ public class Game
                 System.out.println("your guess was too high.");
                 System.out.println("Please make a guess that is lower than " + guess1 + "and greater than or equal to 0");
                 guess2 = scan.nextInt();
+                //Make a condition for if it is equal to the previous guess
                 while(guess2>guess1)
                 {
                     System.out.println("You're guess is not smaller than the one before this.  Please enter a larger integer smaller than " + guess1);
