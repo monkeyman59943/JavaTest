@@ -35,13 +35,29 @@ public class Game
             {
                 System.out.println("your guess was too low.");
                 System.out.println("Please make a guess that is higher than " + guess1 + "and less than or equal to 100");
-
+                guess2 = scan.nextInt();
+                while(guess2<guess1)
+                {
+                   System.out.println("You're guess is not larger than the one before this.  Please enter a larger integer larger than " + guess1);
+                   guess2 = scan.nextInt();
+                }
+                guess1 = guess2;
             }
             if (answer < guess1)
             {
                 System.out.println("your guess was too high.");
                 System.out.println("Please make a guess that is lower than " + guess1 + "and greater than or equal to 0");
+                guess2 = scan.nextInt();
+                while(guess2>guess1)
+                {
+                    System.out.println("You're guess is not smaller than the one before this.  Please enter a larger integer smaller than " + guess1);
+                    guess2 = scan.nextInt();
+                }
+                guess1 = guess2;
             }
+
+            //this assignment may have been redundant, but I will keep it here just in case it isn't and I was mistaken
+            //guess2 = -1;//this resets guess2 so that it wont be equal to guess1 on the next pass if there is one
             numGuess++;
         }
         System.out.println("That is the correct number.");
