@@ -48,7 +48,7 @@ public class Game
         {
             if (answer > guess1)
             {
-                System.out.println("your guess was too low.");
+                System.out.println("You guess is lower than the correct number..");
                 System.out.println("Please make a guess that is higher than " + guess1 + " and less than or equal to 100");
                 guess2 = scan.nextInt();
                 //Make a condition for if it is equal to the previous guess
@@ -70,7 +70,7 @@ public class Game
             }
             if (answer < guess1)
             {
-                System.out.println("your guess was too high.");
+                System.out.println("Your guess was higher than the correct number.");
                 System.out.println("Please make a guess that is lower than " + guess1 + " and greater than or equal to 0");
                 guess2 = scan.nextInt();
                 //Make a condition for if it is equal to the previous guess
