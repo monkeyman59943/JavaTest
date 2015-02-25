@@ -4,7 +4,7 @@ import java.util.*;
 /**
  * Created by Jacob on 2/25/2015.
  */
-public class Employee2Runner {
+public class Payroll {
     public static void main(String[] args) {
 
         Scanner scan = new Scanner(System.in);
