@@ -1,10 +1,18 @@
 package Project7;
+import javax.lang.model.type.PrimitiveType;
+import java.io.*;
 
-/**
- * Created by Jacob on 3/3/2015.
- */
+
 public class Test {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, FileNotFoundException {
+        File file = new File("Employees.txt");
+        File file2 = new File("EmployeesText.txt");
+        PrintWriter PW = new PrintWriter("EmployeesText.txt");
+        FileOutputStream fo = new FileOutputStream(file);
+        ObjectOutputStream output = new ObjectOutputStream(fo);
+        Employee Emp = new Employee(output,PW);
+
+
 
     }
 }
