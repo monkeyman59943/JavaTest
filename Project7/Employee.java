@@ -11,11 +11,26 @@ public class Employee {
     private BigDecimal StateTax;
     private BigDecimal TotalTax;
     private BigDecimal NetPay;
+    private BigDecimal WeekGrossPay;
+    private boolean Salary;
+
 
     public Employee()
     {
 
     }
+    //This is used if the employee is a salary man
+    //s is the salary for the employee
+    public void calcWeekGrossPay(BigDecimal s)
+    {
+            WeekGrossPay = s.divide(new BigDecimal("52"));
+    }
+
+    public void calcWeekGrossPay(double h)
+    {
+
+    }
+
 
 
 }
