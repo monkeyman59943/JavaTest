@@ -13,17 +13,18 @@ public class Employee implements Serializable{
     private BigDecimal TotalTax;
     private BigDecimal NetPay;
     private BigDecimal WeekGrossPay;
-    private BigDecimal payRate;
+    private BigDecimal PayRate;
     private BigDecimal GrossPay;
     private boolean Salary;
 
 
-    public Employee(ObjectOutputStream oo, PrintWriter PW, ObjectInputStream input)
+    public Employee(ObjectOutputStream oo, ObjectInputStream input)
     {
         boolean go = true;
         double ID;
         char e;
         boolean s;
+        BigDecimal r;
         BigDecimal Ft;
         BigDecimal St;
         BigDecimal d=new BigDecimal("0");
@@ -33,9 +34,9 @@ public class Employee implements Serializable{
         scan.nextLine();
         if(e=='y')
         {
-            System.out.println("What is the federal tax rate (it's 10% of the gross pay)");
+            System.out.println("What is the federal tax rate (it's .10 of the gross pay)");
             Ft = new BigDecimal(scan.nextLine());
-            System.out.println("What is the state tax rate (it's 5% of the gross pay)");
+            System.out.println("What is the state tax rate (it's .05 of the gross pay)");
             St = new BigDecimal(scan.nextLine());
             while(go)
             {
@@ -55,9 +56,10 @@ public class Employee implements Serializable{
                     case('h'):
                     {
                         scan.nextLine();
-                        System.out.println("How much does this employee make an hour?");
-                        d = new BigDecimal(scan.nextDouble());
+                        System.out.println("How many hours does this employee work a week?");
+                        d = new BigDecimal(scan.nextLine());
                         s = false;
+                        break;
                     }
                     default:
                     {
@@ -70,7 +72,6 @@ public class Employee implements Serializable{
 
                 try {
                     oo.writeObject(Emp);
-                    PW.print(Emp);
                 } catch (IOException e1) {
 
                 }
@@ -96,7 +97,9 @@ public class Employee implements Serializable{
         calcFedTax(Ft);
         calcStateTax(St);
         TotalTax = FedTax.add(StateTax);
+        calcNetPay();
     }
+
 
     public void calcGrossPay()
     {
@@ -107,29 +110,28 @@ public class Employee implements Serializable{
     public void calcWeekGrossPay(BigDecimal d)
     {
         if(Salary) {
-            WeekGrossPay = d.divide(new BigDecimal("52"),2, RoundingMode.HALF_UP);
+            WeekGrossPay = d.divide(new BigDecimal("52"),20, RoundingMode.HALF_UP);
         }
         else
         {
             System.out.println("How much does this employee make an hour?");
             Scanner scan = new Scanner(System.in);
-            payRate = new BigDecimal(scan.nextLine());
-            scan.close();
+            PayRate = new BigDecimal(scan.nextLine());
             //Copied from Employee2 in package Payroll assuming works
 
             if(d.compareTo(new BigDecimal(40))==-1||d.compareTo(new BigDecimal(40))==0)
             {
-                WeekGrossPay=d.multiply(payRate);
+                WeekGrossPay=d.multiply(PayRate);
             }
 
             if(d.compareTo(new BigDecimal(40))==1&&(d.compareTo(new BigDecimal(50))==-1||d.compareTo(new BigDecimal(50))==0))
             {
-                WeekGrossPay = (payRate.multiply(new BigDecimal(40))).add(((d.subtract(new BigDecimal(40))).multiply(payRate.multiply(new BigDecimal("1.5")))));
+                WeekGrossPay = (PayRate.multiply(new BigDecimal(40))).add(((d.subtract(new BigDecimal(40))).multiply(PayRate.multiply(new BigDecimal("1.5")))));
             }
 
             if(d.compareTo(new BigDecimal("50"))==1)
             {//                   First block                          second block                                                                                         third block
-                WeekGrossPay=( (payRate.multiply(new BigDecimal(40))).add(((new BigDecimal("10")).multiply(payRate.multiply(new BigDecimal("1.5")))))).add(d.subtract(new BigDecimal("50")).multiply((payRate.multiply(new BigDecimal("2")))));
+                WeekGrossPay=( (PayRate.multiply(new BigDecimal(40))).add(((new BigDecimal("10")).multiply(PayRate.multiply(new BigDecimal("1.5")))))).add(d.subtract(new BigDecimal("50")).multiply((PayRate.multiply(new BigDecimal("2")))));
             }
         }
     }
@@ -141,17 +143,22 @@ public class Employee implements Serializable{
     {
         StateTax = GrossPay.multiply(R);
     }
-
+    private void calcNetPay()
+    {
+        NetPay = GrossPay.subtract(TotalTax);
+    }
 
     public String toString()
     {
         String result = "";
-        result = result + ("Employee ID: " + EmployeeID + "\n");
-        result = result + ("Week gross pay: " + WeekGrossPay + "\n");
-        result = result + ("Total gross pay: " + GrossPay +  "\n");
-        result = result + ("Federal tax payed: " + FedTax + "\n");
-        result = result + ("State tax payed: " + StateTax + "\n");
-        result = result + ("Total tax payed: " + TotalTax + "\n");
+
+        result = result + String.format("Employee ID:         %.2f %n", EmployeeID);
+        result = result + String.format("Week gross pay:      %.2f %n", WeekGrossPay);
+        result = result + String.format("Total gross pay:     %.2f %n" , GrossPay );
+        result = result + String.format("Federal tax payed:   %.2f %n" , FedTax);
+        result = result + String.format("State tax payed:     %.2f %n" , StateTax);
+        result = result + String.format("Total tax payed:     %.2f %n", TotalTax);
+        result = result + String.format("Net pay after taxes: %.2f %n ",  NetPay);
         return result;
     }
 
