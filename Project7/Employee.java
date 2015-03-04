@@ -1,9 +1,6 @@
 package Project7;
 
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
-import java.io.Serializable;
+import java.io.*;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Scanner;
@@ -21,7 +18,7 @@ public class Employee implements Serializable{
     private boolean Salary;
 
 
-    public Employee(ObjectOutputStream oo, PrintWriter PW)
+    public Employee(ObjectOutputStream oo, PrintWriter PW, ObjectInputStream input)
     {
         boolean go = true;
         double ID;
@@ -73,7 +70,7 @@ public class Employee implements Serializable{
 
                 try {
                     oo.writeObject(Emp);
-                    PW.println("2");
+                    PW.print(Emp);
                 } catch (IOException e1) {
 
                 }
@@ -85,7 +82,7 @@ public class Employee implements Serializable{
         {
             System.out.println("No employees were entered.");
         }
-
+    scan.close();
 
     }
     //I
@@ -114,7 +111,10 @@ public class Employee implements Serializable{
         }
         else
         {
-
+            System.out.println("How much does this employee make an hour?");
+            Scanner scan = new Scanner(System.in);
+            payRate = new BigDecimal(scan.nextLine());
+            scan.close();
             //Copied from Employee2 in package Payroll assuming works
 
             if(d.compareTo(new BigDecimal(40))==-1||d.compareTo(new BigDecimal(40))==0)
